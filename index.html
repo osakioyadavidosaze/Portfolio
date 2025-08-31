@@ -9,9 +9,14 @@
   <meta property="og:image" content="profile-image.jpg">
   <meta property="og:url" content="https://your-portfolio.com">
   <title>Osaze David | Portfolio</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#006064">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <style>
     :root {
       --primary-color: #006064;
@@ -1081,6 +1086,200 @@
       color: var(--secondary-color);
     }
 
+
+
+    /* Scroll Progress */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      z-index: 1001;
+      transition: width 0.1s ease;
+    }
+
+    /* Live Chat Widget */
+    .chat-widget {
+      position: fixed;
+      bottom: 100px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background: var(--primary-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+
+    .chat-widget:hover {
+      transform: scale(1.1);
+      background: var(--secondary-color);
+    }
+
+    .chat-box {
+      position: fixed;
+      bottom: 170px;
+      right: 20px;
+      width: 300px;
+      height: 400px;
+      background: var(--card-bg);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      display: none;
+      flex-direction: column;
+      z-index: 1001;
+    }
+
+    .chat-header {
+      background: var(--primary-color);
+      color: white;
+      padding: 15px;
+      border-radius: 15px 15px 0 0;
+      font-weight: 600;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+    }
+
+    .chat-input {
+      padding: 15px;
+      border-top: 1px solid #eee;
+    }
+
+    .chat-input input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      outline: none;
+    }
+
+
+
+    /* Search Bar */
+    .search-container {
+      position: fixed;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 500px;
+      background: var(--card-bg);
+      border-radius: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      z-index: 2000;
+      transition: all 0.3s ease;
+    }
+
+    .search-container.show {
+      top: 100px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 15px 20px;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      outline: none;
+      background: transparent;
+      color: var(--text-color);
+    }
+
+    /* Floating Menu */
+    .floating-menu {
+      position: fixed;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1000;
+    }
+
+    .floating-menu-item {
+      width: 50px;
+      height: 50px;
+      background: var(--primary-color);
+      border-radius: 50%;
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: white;
+      font-size: 20px;
+    }
+
+    .floating-menu-item:hover {
+      transform: scale(1.2);
+      background: var(--secondary-color);
+    }
+
+    /* Skill Radar Chart */
+    .skill-radar {
+      width: 300px;
+      height: 300px;
+      margin: 40px auto;
+    }
+
+
+
+    /* Language Switcher */
+    .language-switcher {
+      position: fixed;
+      top: 160px;
+      right: 20px;
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 5px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+
+    .lang-btn {
+      padding: 8px 12px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      border-radius: 15px;
+      font-size: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .lang-btn.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    /* Easter Egg */
+    .easter-egg {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: var(--card-bg);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      z-index: 3000;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .easter-egg.show {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
       .hero h1 { font-size: 40px; }
@@ -1091,6 +1290,9 @@
       .timeline::before { left: 20px; }
       .timeline-item { width: 100%; left: 0 !important; padding-left: 50px !important; padding-right: 0 !important; text-align: left !important; }
       .timeline-item .timeline-dot { left: 14px !important; }
+      .floating-menu { display: none; }
+
+      .language-switcher { top: 110px; right: 10px; }
     }
   </style>
 </head>
@@ -1101,6 +1303,46 @@
       <div class="loader-text">OSAZE DAVID</div>
       <div class="loader-bar"><div class="loader-progress"></div></div>
     </div>
+  </div>
+
+
+
+  <!-- Scroll Progress -->
+  <div class="scroll-progress"></div>
+
+  <!-- Language Switcher -->
+  <div class="language-switcher">
+    <button class="lang-btn active" onclick="switchLanguage('en')">EN</button>
+    <button class="lang-btn" onclick="switchLanguage('fr')">FR</button>
+  </div>
+
+  <!-- Live Chat Widget -->
+  <div class="chat-widget" onclick="toggleChat()">
+    💬
+  </div>
+
+  <!-- Chat Box -->
+  <div class="chat-box" id="chatBox">
+    <div class="chat-header">
+      Chat with Osaze
+      <span style="float: right; cursor: pointer;" onclick="toggleChat()">×</span>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div style="margin-bottom: 10px; color: var(--primary-color);">👋 Hi! How can I help you today?</div>
+    </div>
+    <div class="chat-input">
+      <input type="text" placeholder="Type your message..." onkeypress="sendMessage(event)">
+    </div>
+  </div>
+
+
+
+  <!-- Easter Egg -->
+  <div class="easter-egg" id="easterEgg">
+    <div style="font-size: 48px; margin-bottom: 20px;">🎉</div>
+    <h3 style="color: var(--text-color);">You found the secret!</h3>
+    <p style="color: var(--text-color); opacity: 0.8;">Konami Code activated! You're a true developer!</p>
+    <button onclick="closeEasterEgg()" style="margin-top: 20px; padding: 10px 20px; background: var(--primary-color); color: white; border: none; border-radius: 5px; cursor: pointer;">Cool!</button>
   </div>
 
   <!-- Theme Toggle -->
@@ -1152,7 +1394,6 @@
     </div>
   </div>
 
-  <!-- Hero -->
   <section class="hero">
     <div id="particles-js"></div>
     <div class="hero-content">
@@ -1166,7 +1407,7 @@
   </section>
 
   <!-- About Me -->
-  <div class="container" id="about">
+  <div class="container" id="about" data-aos="fade-up">
     <h2>About Me</h2>
     <div class="about-me">
       <img src="love.jpd/love.jpg" alt="Osaze David - Profile Picture">
@@ -1204,7 +1445,7 @@
   </div>
 
   <!-- Experience Timeline -->
-  <div class="container" id="experience">
+  <div class="container" id="experience" data-aos="fade-up">
     <h2>Experience</h2>
     <div class="timeline">
       <div class="timeline-item">
@@ -1235,7 +1476,7 @@
   </div>
 
   <!-- Services -->
-  <div class="container" id="services">
+  <div class="container" id="services" data-aos="fade-up">
     <h2>Services</h2>
     <div class="services-grid">
       <div class="service-card">
@@ -1257,8 +1498,11 @@
   </div>
 
   <!-- Skills -->
-  <div class="container skills" id="skills">
+  <div class="container skills" id="skills" data-aos="fade-up">
     <h2>Skills</h2>
+    <div class="skill-radar">
+      <canvas id="skillChart"></canvas>
+    </div>
     <div class="skills-grid">
       <div class="skill-item">
         <div class="skill-name">HTML/CSS</div>
@@ -1307,7 +1551,7 @@
   </div>
 
   <!-- Projects -->
-  <div class="container" id="projects">
+  <div class="container" id="projects" data-aos="fade-up">
     <h2>Projects</h2>
     <div class="project-filters">
       <button class="filter-btn active" onclick="filterProjects('all')">All</button>
@@ -1336,7 +1580,7 @@
   </div>
 
   <!-- Blog -->
-  <div class="container" id="blog">
+  <div class="container" id="blog" data-aos="fade-up">
     <h2>Latest Blog Posts</h2>
     <div class="blog-grid">
       <div class="blog-card">
@@ -1492,22 +1736,244 @@
       }, 3000);
     });
 
-    // Project Filter
-    function filterProjects(category) {
-      const cards = document.querySelectorAll('.card[data-category]');
-      const buttons = document.querySelectorAll('.filter-btn');
-      
-      buttons.forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
-      
-      cards.forEach(card => {
-        if (category === 'all' || card.dataset.category === category) {
-          card.classList.remove('hidden');
+    // Initialize AOS
+    AOS.init({ duration: 1000, once: true });
+
+
+
+    // Scroll Progress
+    window.addEventListener('scroll', () => {
+      const scrolled = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+      document.querySelector('.scroll-progress').style.width = scrolled + '%';
+    });
+
+    // Skill Radar Chart
+    const ctx = document.getElementById('skillChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'radar',
+      data: {
+        labels: ['HTML/CSS', 'JavaScript', 'PHP', 'Python', 'MySQL', 'UI/UX'],
+        datasets: [{
+          label: 'Skills',
+          data: [90, 80, 85, 75, 80, 70],
+          backgroundColor: 'rgba(0, 188, 212, 0.2)',
+          borderColor: '#00bcd4',
+          pointBackgroundColor: '#006064'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: { r: { beginAtZero: true, max: 100 } }
+      }
+    });
+
+    // Live Chat
+    function toggleChat() {
+      const chatBox = document.getElementById('chatBox');
+      chatBox.style.display = chatBox.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    function sendMessage(event) {
+      if (event.key === 'Enter') {
+        const input = event.target;
+        const messages = document.getElementById('chatMessages');
+        messages.innerHTML += `<div style="margin: 10px 0; text-align: right; background: var(--primary-color); color: white; padding: 8px 12px; border-radius: 15px; display: inline-block; max-width: 80%;">${input.value}</div>`;
+        setTimeout(() => {
+          messages.innerHTML += `<div style="margin: 10px 0; color: var(--primary-color);">Thanks for your message! I'll get back to you soon.</div>`;
+          messages.scrollTop = messages.scrollHeight;
+        }, 1000);
+        input.value = '';
+        messages.scrollTop = messages.scrollHeight;
+      }
+    }
+
+    // Search Functionality
+    function toggleSearch() {
+      document.querySelector('.search-container').classList.toggle('show');
+    }
+
+    function searchContent(query) {
+      const elements = document.querySelectorAll('h1, h2, h3, p, .card');
+      elements.forEach(el => {
+        if (query && !el.textContent.toLowerCase().includes(query.toLowerCase())) {
+          el.style.opacity = '0.3';
         } else {
-          card.classList.add('hidden');
+          el.style.opacity = '1';
         }
       });
     }
+
+
+
+    // Language Switcher
+    const translations = {
+      en: {
+        'Hello, I\'m Osaze David': 'Hello, I\'m Osaze David',
+        'About Me': 'About Me',
+        'Experience': 'Experience',
+        'Services': 'Services',
+        'Skills': 'Skills',
+        'Projects': 'Projects',
+        'Latest Blog Posts': 'Latest Blog Posts',
+        'Contact': 'Contact',
+        'Download CV': 'Download CV',
+        'Full Stack Developer & UI/UX Designer': 'Full Stack Developer & UI/UX Designer',
+        'Passionate about creating amazing digital experiences': 'Passionate about creating amazing digital experiences',
+        'Get In Touch': 'Get In Touch',
+        'View My Work': 'View My Work',
+        'Web Development': 'Web Development',
+        'UI/UX Design': 'UI/UX Design',
+        'Mobile Apps': 'Mobile Apps',
+        'Consulting': 'Consulting',
+        'All': 'All',
+        'Web': 'Web',
+        'Mobile': 'Mobile',
+        'Design': 'Design',
+        'Name': 'Name',
+        'Email': 'Email',
+        'Message': 'Message',
+        'Send Message': 'Send Message',
+        'Thanks for your message! I\'ll get back to you soon.': 'Thanks for your message! I\'ll get back to you soon.',
+        'Search...': 'Search...'
+      },
+      fr: {
+        'Hello, I\'m Osaze David': 'Bonjour, je suis Osaze David',
+        'About Me': 'À Propos',
+        'Experience': 'Expérience',
+        'Services': 'Services',
+        'Skills': 'Compétences',
+        'Projects': 'Projets',
+        'Latest Blog Posts': 'Derniers Articles',
+        'Contact': 'Contact',
+        'Download CV': 'Télécharger CV',
+        'Full Stack Developer & UI/UX Designer': 'Développeur Full Stack & Designer UI/UX',
+        'Passionate about creating amazing digital experiences': 'Passionné par la création d\'expériences numériques incroyables',
+        'Get In Touch': 'Contactez-moi',
+        'View My Work': 'Voir Mon Travail',
+        'Web Development': 'Développement Web',
+        'UI/UX Design': 'Design UI/UX',
+        'Mobile Apps': 'Applications Mobiles',
+        'Consulting': 'Conseil',
+        'All': 'Tous',
+        'Web': 'Web',
+        'Mobile': 'Mobile',
+        'Design': 'Design',
+        'Name': 'Nom',
+        'Email': 'Email',
+        'Message': 'Message',
+        'Send Message': 'Envoyer Message',
+        'Thanks for your message! I\'ll get back to you soon.': 'Merci pour votre message! Je vous répondrai bientôt.',
+        'Search...': 'Rechercher...'
+      }
+    };
+
+    function switchLanguage(lang) {
+      // Update button states
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        if (btn.textContent.toLowerCase() === lang) {
+          btn.classList.add('active');
+        }
+      });
+      
+      // Translate elements
+      const elementsToTranslate = [
+        { selector: 'h1', attr: 'textContent' },
+        { selector: 'h2', attr: 'textContent' },
+        { selector: 'h3', attr: 'textContent' },
+        { selector: 'nav a', attr: 'textContent' },
+        { selector: '.btn', attr: 'textContent' },
+        { selector: 'p', attr: 'textContent' },
+        { selector: '.hero-subtitle', attr: 'textContent' },
+        { selector: '.service-card h3', attr: 'textContent' },
+        { selector: '.filter-btn', attr: 'textContent' },
+        { selector: 'label', attr: 'textContent' },
+        { selector: 'input[placeholder]', attr: 'placeholder' },
+        { selector: 'textarea[placeholder]', attr: 'placeholder' }
+      ];
+      
+      elementsToTranslate.forEach(({ selector, attr }) => {
+        document.querySelectorAll(selector).forEach(el => {
+          const text = attr === 'placeholder' ? el.placeholder?.trim() : el.textContent.trim();
+          if (!text) return;
+          
+          // Find translation in either direction
+          let newText = text;
+          if (translations[lang] && translations[lang][text]) {
+            newText = translations[lang][text];
+          } else {
+            // Check reverse translation
+            const otherLang = lang === 'en' ? 'fr' : 'en';
+            Object.keys(translations[otherLang]).forEach(key => {
+              if (translations[otherLang][key] === text) {
+                newText = key;
+              }
+            });
+          }
+          
+          if (attr === 'placeholder') {
+            el.placeholder = newText;
+          } else {
+            el.textContent = newText;
+          }
+        });
+      });
+      
+      localStorage.setItem('language', lang);
+    }
+
+    // Load saved language and setup event listeners
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('language') || 'en';
+      if (savedLang === 'fr') {
+        switchLanguage('fr');
+      }
+      
+      // Add click event listeners to language buttons
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const lang = btn.textContent.toLowerCase() === 'en' ? 'en' : 'fr';
+          switchLanguage(lang);
+        });
+      });
+    });
+
+    // Utility Functions
+    function sharePortfolio() {
+      navigator.share ? navigator.share({ title: 'Osaze David Portfolio', url: window.location.href }) : 
+      navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied!'));
+    }
+
+    function toggleFullscreen() {
+      document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+    }
+
+    // Easter Egg (Konami Code) - moved to avoid redeclaration
+    if (typeof window.konamiCode === 'undefined') {
+      window.konamiCode = [];
+      const konami = [38,38,40,40,37,39,37,39,66,65];
+      document.addEventListener('keydown', (e) => {
+        const keyCode = e.keyCode || e.which;
+        window.konamiCode.push(keyCode);
+        if (window.konamiCode.length > 10) window.konamiCode.shift();
+        if (window.konamiCode.join(',') === konami.join(',')) {
+          const easterEgg = document.getElementById('easterEgg');
+          if (easterEgg) easterEgg.classList.add('show');
+          window.konamiCode = [];
+        }
+      });
+    }
+
+    function closeEasterEgg() {
+      const easterEgg = document.getElementById('easterEgg');
+      if (easterEgg) easterEgg.classList.remove('show');
+    }
+
+
+
+
 
     // Initialize particles
     particlesJS('particles-js', {
@@ -1786,8 +2252,143 @@
       if (e.key === 'Escape') {
         closeModal();
         closeLightbox();
+        document.querySelector('.search-container').classList.remove('show');
+      }
+      if (e.ctrlKey && e.key === 'k') {
+        e.preventDefault();
+        toggleSearch();
       }
     });
+
+    // PWA Service Worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    }
+
+    // Project Filter
+    function filterProjects(category) {
+      const cards = document.querySelectorAll('.card[data-category]');
+      const buttons = document.querySelectorAll('.filter-btn');
+      
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      cards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    // Initialize missing functions
+    function toggleSearch() {
+      document.querySelector('.search-container').classList.toggle('show');
+    }
+
+    function searchContent(query) {
+      const elements = document.querySelectorAll('h1, h2, h3, p, .card');
+      elements.forEach(el => {
+        if (query && !el.textContent.toLowerCase().includes(query.toLowerCase())) {
+          el.style.opacity = '0.3';
+        } else {
+          el.style.opacity = '1';
+        }
+      });
+    }
+
+    function toggleChat() {
+      const chatBox = document.getElementById('chatBox');
+      chatBox.style.display = chatBox.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    function sendMessage(event) {
+      if (event.key === 'Enter') {
+        const input = event.target;
+        const messages = document.getElementById('chatMessages');
+        messages.innerHTML += `<div style="margin: 10px 0; text-align: right; background: var(--primary-color); color: white; padding: 8px 12px; border-radius: 15px; display: inline-block; max-width: 80%;">${input.value}</div>`;
+        setTimeout(() => {
+          messages.innerHTML += `<div style="margin: 10px 0; color: var(--primary-color);">Thanks for your message! I'll get back to you soon.</div>`;
+          messages.scrollTop = messages.scrollHeight;
+        }, 1000);
+        input.value = '';
+        messages.scrollTop = messages.scrollHeight;
+      }
+    }
+
+    function sharePortfolio() {
+      if (navigator.share) {
+        navigator.share({ title: 'Osaze David Portfolio', url: window.location.href });
+      } else {
+        navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied!'));
+      }
+    }
+
+    function toggleFullscreen() {
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      } else {
+        document.documentElement.requestFullscreen();
+      }
+    }
+
+    function closeEasterEgg() {
+      document.getElementById('easterEgg').classList.remove('show');
+    }
+
+    // Easter Egg (Konami Code)
+    let konamiCode = [];
+    const konami = [38,38,40,40,37,39,37,39,66,65];
+    document.addEventListener('keydown', (e) => {
+      konamiCode.push(e.keyCode);
+      if (konamiCode.length > 10) konamiCode.shift();
+      if (konamiCode.join(',') === konami.join(',')) {
+        document.getElementById('easterEgg').classList.add('show');
+      }
+    });
+
+    // Scroll Progress
+    window.addEventListener('scroll', () => {
+      const scrolled = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+      document.querySelector('.scroll-progress').style.width = scrolled + '%';
+    });
+
+    // Skill Radar Chart - with error handling
+    try {
+      const ctx = document.getElementById('skillChart');
+      if (ctx && typeof Chart !== 'undefined') {
+        new Chart(ctx.getContext('2d'), {
+          type: 'radar',
+          data: {
+            labels: ['HTML/CSS', 'JavaScript', 'PHP', 'Python', 'MySQL', 'UI/UX'],
+            datasets: [{
+              label: 'Skills',
+              data: [90, 80, 85, 75, 80, 70],
+              backgroundColor: 'rgba(0, 188, 212, 0.2)',
+              borderColor: '#00bcd4',
+              pointBackgroundColor: '#006064'
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: { r: { beginAtZero: true, max: 100 } }
+          }
+        });
+      }
+    } catch (e) {
+      console.log('Chart.js not loaded');
+    }
+
+    // Initialize AOS - with error handling
+    try {
+      if (typeof AOS !== 'undefined') {
+        AOS.init({ duration: 1000, once: true });
+      }
+    } catch (e) {
+      console.log('AOS not loaded');
+    }
   </script>
 
 </body>
