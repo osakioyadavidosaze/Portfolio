@@ -1140,34 +1140,22 @@
         loading.style.display = 'inline-block';
         submitBtn.disabled = true;
         
-        // Send form data to PHP
-        const formData = new FormData(form);
+        // Use mailto link to send email
+        const subject = encodeURIComponent(`Contact from ${name}`);
+        const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+        const mailtoLink = `mailto:osazedavid969@gmail.com?subject=${subject}&body=${body}`;
         
-        fetch('submit_form.php', {
-          method: 'POST',
-          body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
+        setTimeout(() => {
           loading.style.display = 'none';
           submitBtn.disabled = false;
-          
-          if (data.success) {
-            showSuccessPopup();
-            form.reset();
-            document.querySelectorAll('.form-group').forEach(group => {
-              group.classList.remove('success', 'error');
-            });
-            setTimeout(() => closeModal(), 2000);
-          } else {
-            alert('Failed to send message: ' + data.message);
-          }
-        })
-        .catch(error => {
-          loading.style.display = 'none';
-          submitBtn.disabled = false;
-          alert('Error sending message. Please try again.');
-        });
+          window.open(mailtoLink);
+          showSuccessPopup();
+          form.reset();
+          document.querySelectorAll('.form-group').forEach(group => {
+            group.classList.remove('success', 'error');
+          });
+          setTimeout(() => closeModal(), 2000);
+        }, 1000);
       }
     });
 
