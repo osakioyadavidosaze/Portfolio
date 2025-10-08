@@ -1390,18 +1390,22 @@
           I'm a passionate and self-driven tech enthusiast with hands-on skills in web development,
           mobile app design, and backend programming. I enjoy building responsive user interfaces and
           logic-driven applications using tools like HTML, PHP, and Figma.
-        </p>
+        <div class="container">
+        <button class="btn" onclick="openCVModal()">View CV</button>
+    </div>
+
+    <!-- Modal -->
     <div id="cvModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeCVModal()">&times;</span>
             <div class="cv-container">
                 <div class="header">
-                    <!-- Placeholder for profile image; replace src with actual image URL -->
-                    <img src="profile-image.jpg" alt="Osakioya David Osaze">
                     <div class="header-info">
                         <h1>Osakioya David Osaze</h1>
                         <p>Abuja, Nigeria | 09137111247 | osazedavid969@gmail.com</p>
                     </div>
+                    <!-- Placeholder for profile image; replace src with actual image URL -->
+                    <img src="profile-image.jpg" alt="Osakioya David Osaze">
                 </div>
 
                 <div class="section">
@@ -1449,16 +1453,11 @@
                     <p>Gaming (Call of Duty Mobile), Reading, and Having Conversations with Mena.</p>
                 </div>
 
-                <div style="text-align: center; margin-top: 20px;">
+                <div class="download-section">
                     <a href="Osakioya_David_Osaze_CV_with_Image.pdf" download class="btn">Download CV PDF</a>
                 </div>
             </div>
         </div>
-    </div>
-
-          <a href="#" class="btn" onclick="showCVPopup()">Download CV</a>
-        </div>
-      </div>
     </div>
     
     <!-- Stats -->
